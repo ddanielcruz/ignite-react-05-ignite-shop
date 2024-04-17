@@ -24,6 +24,7 @@ export default function Home({ products }: HomeProps) {
       perView: 'auto',
       spacing: 48,
     },
+    loop: true,
   })
 
   return (
@@ -33,6 +34,7 @@ export default function Home({ products }: HomeProps) {
           key={product.id}
           href={`/product/${product.id}`}
           className="keen-slider__slide"
+          prefetch={false}
         >
           <Image src={product.image} width={520} height={480} alt="" />
 
