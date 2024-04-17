@@ -2,6 +2,7 @@ import 'keen-slider/keen-slider.min.css'
 
 import { useKeenSlider } from 'keen-slider/react'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import Stripe from 'stripe'
 
@@ -28,28 +29,32 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          href={`/product/${product.id}`}
-          className="keen-slider__slide"
-          prefetch={false}
-        >
-          <Image src={product.image} width={520} height={480} alt="" />
-
-          <footer>
-            <strong>{product.name}</strong>
-            <span>
-              {product.price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </span>
-          </footer>
-        </Product>
-      ))}
-    </HomeContainer>
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {products.map((product) => (
+          <Product
+            key={product.id}
+            href={`/product/${product.id}`}
+            className="keen-slider__slide"
+            prefetch={false}
+          >
+            <Image src={product.image} width={520} height={480} alt="" />
+            <footer>
+              <strong>{product.name}</strong>
+              <span>
+                {product.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </span>
+            </footer>
+          </Product>
+        ))}
+      </HomeContainer>
+    </>
   )
 }
 
